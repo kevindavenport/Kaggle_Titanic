@@ -1,18 +1,16 @@
 rm(list=ls()) 
-library(randomForest)
-#library(missForest)
-library(imputation)
+library(randomForest);library(imputation)
 
-## Load Data
+## Data read
 train_all <- read.csv("train.csv", header=TRUE, stringsAsFactors=FALSE ) 
 test_all  <- read.csv("test.csv", header=TRUE,  stringsAsFactors=FALSE )
 str(train_all) # Examine variable types
 
-## Drop useless columns from the DF
+## Drop unused columns
 train <- subset(train_all, select = c(survived, pclass, sex, age, fare, sibsp, cabin)) 
 test <- subset(test_all, select = c(pclass, sex, age, fare, sibsp, cabin)) 
-train <- droplevels(train)
-test <- droplevels(test)
+
+
 ## Address NA values
 
 # TRAIN Fare & Age convert 0 to NA
